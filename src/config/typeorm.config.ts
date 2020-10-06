@@ -5,8 +5,8 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'postgres', // estou usando outra senha na minha API localmente, mas subindo a padrão do postgres
-  database: 'bancodedados',
+  password: 'postgres', // estou usando outra senha na minha API localmente, mas subindo a "padrão" do postgres
+  database: 'desafio',
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   synchronize: true,
 };
