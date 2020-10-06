@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { AddressController } from './address.controller';
 
-@Module({})
+@Module({
+  controllers: [AddressController]
+})
 export class AddressModule {}
