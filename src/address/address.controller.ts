@@ -1,4 +1,4 @@
 import { Controller } from '@nestjs/common';
 
-@Controller('address')
+@Controller('/endereco')
 export class AddressController {}
