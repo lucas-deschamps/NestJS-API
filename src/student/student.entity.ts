@@ -9,7 +9,7 @@ export class Student extends BaseEntity {
   nome: string;
 
   @Column({ type: "date" })
-  dataNascimento: string;
+  data_nascimento: string;
 
   @Column({ type: "varchar" })
   cpf: string;
