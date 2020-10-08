@@ -8,6 +8,10 @@ import { AddressDto } from './dto/address.dto';
 export class AddressService {
   constructor(@InjectRepository(AddressRepository) private addressRepository: AddressRepository) {}
 
+  async getAllAddresses(): Promise<Address[]> {
+    return await this.addressRepository.find();
+  };
+
   async createAddress(addressDto: AddressDto): Promise<Address> {
     return this.addressRepository.createAddress(addressDto);
   };
