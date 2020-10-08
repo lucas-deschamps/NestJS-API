@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { StudentDto } from './dto/student.dto';
 import { Student } from './student.entity';
@@ -8,7 +8,7 @@ export class StudentController {
   constructor(private studentService: StudentService) {}
 
   @Get('/:id')
-  getStudentById(@Param('id') id: number): Promise<Student> {
+  getStudentById(@Param('id', ParseIntPipe) id: number): Promise<Student> {
     return this.studentService.getStudentById(id);
   };
 
