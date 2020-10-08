@@ -12,7 +12,7 @@ export class StudentService {
     const student = await this.studentRepository.findOne(id);
 
     if (!student) {
-      throw new NotFoundException(`O aluno com o ID "${id}" não foi encontrado.`);
+      throw new NotFoundException(`O aluno com o ID '${id}' não foi encontrado.`);
     };
 
     return student;
