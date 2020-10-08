@@ -22,4 +22,8 @@ export class StudentService {
     return this.studentRepository.createStudent(studentDto);
   };
 
+  async updateStudent(id: number, studentDto: StudentDto): Promise<Student> {
+    return this.studentRepository.updateStudent(id, studentDto);
+  };
+
 };

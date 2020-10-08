@@ -18,4 +18,9 @@ export class StudentRepository extends Repository<Student> {
 
     return student;
   };
+
+  async updateStudent(id: number, studentDto: StudentDto): Promise<Student> {
+    return await this.save({ ...studentDto, id: Number(id) })
+  };
+  
 };
