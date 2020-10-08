@@ -1,4 +1,4 @@
 # Desafio API NestJS
 
-Devido à presença do arquivo `.gitignore` no próprio repositório, será necessário executar `npm install` após clonagem ou download do repositório.
+É necessário executar `npm install` após clonagem ou download do repositório, de modo a instalar todas as dependências necessárias para o funcionamento da API.
 
