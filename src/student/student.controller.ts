@@ -12,6 +12,11 @@ export class StudentController {
     return this.studentService.getAllStudents();
   };
 
+  @Get('/media')
+  getUpperEndStudents(): Promise<Student[]> {
+    return this.studentService.getUpperEndStudents();
+  };
+
   @Get('/:id')
   getStudentById(@Param('id', ParseIntPipe) id: number): Promise<Student> {
     return this.studentService.getStudentById(id);

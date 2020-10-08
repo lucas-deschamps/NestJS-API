@@ -12,6 +12,27 @@ export class StudentService {
     return await this.studentRepository.find();
   };
 
+  async getUpperEndStudents(): Promise<Student[]> {
+    let total = 0;
+    const upperEndStudents: Student[] = [];
+
+    const students: Student[] = await this.getAllStudents();
+
+    for (const student of students) {
+      total += Number(student.nota);
+    };
+
+    const averageGrade = total / students.length;
+
+    for (const student of students) {
+      if (student.nota > averageGrade) {
+        upperEndStudents.push(student);
+      };
+    };
+
+    return upperEndStudents;
+  };
+
   async getStudentById(id: number): Promise<Student> {
     const student = await this.studentRepository.findOne(id);
 

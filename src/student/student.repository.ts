@@ -25,10 +25,10 @@ export class StudentRepository extends Repository<Student> {
   };
 
   async deleteStudent(id: number): Promise<void> {
+    const result = await this.delete(id);
     try {
-      await this.delete(id);
+      result;
     } catch {
-      const result = await this.delete(id);
       if (result.affected === 0) {
         throw new NotFoundException(`Aluno com o ID '${id}' não foi encontrado.`);
       };
