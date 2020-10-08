@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { StudentDto } from './dto/student.dto';
 import { Student } from './student.entity';
@@ -20,5 +20,10 @@ export class StudentController {
   @Put('/:id')
   updateStudent(@Param('id', ParseIntPipe) id: number, @Body() studentDto: StudentDto): Promise<Student> {
     return this.studentService.updateStudent(id, studentDto);
+  };
+
+  @Delete('/:id')
+  deleteStudent(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.studentService.deleteStudent(id);
   };
 };

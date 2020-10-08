@@ -1,6 +1,7 @@
 import { EntityRepository, Repository } from "typeorm";
 import { Student } from './student.entity';
 import { StudentDto } from './dto/student.dto';
+import { NotFoundException } from "@nestjs/common";
 
 @EntityRepository(Student)
 export class StudentRepository extends Repository<Student> {
@@ -22,5 +23,15 @@ export class StudentRepository extends Repository<Student> {
   async updateStudent(id: number, studentDto: StudentDto): Promise<Student> {
     return await this.save({ ...studentDto, id: Number(id) })
   };
-  
+
+  async deleteStudent(id: number): Promise<void> {
+    try {
+      await this.delete(id);
+    } catch {
+      const result = await this.delete(id);
+      if (result.affected === 0) {
+        throw new NotFoundException(`Aluno com o ID '${id}' não foi encontrado.`);
+      };
+    };
+  };
 };
