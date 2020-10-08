@@ -14,6 +14,6 @@ export class Student extends BaseEntity {
   @Column({ type: "varchar" })
   cpf: string;
 
-  @Column({ type: "decimal", precision: 2 })
+  @Column({ type: "decimal", precision: 3, scale: 1 })
   nota: number;
 };

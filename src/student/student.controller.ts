@@ -22,6 +22,11 @@ export class StudentController {
     return this.studentService.getStudentById(id);
   };
 
+  @Get('/:nota/criterio/:criterio')
+  getStudentByCriteria(@Param('nota', ParseIntPipe) grade: number, @Param('criterio') criteria: string): Promise<Student[]> {
+    return this.studentService.getStudentByCriteria(grade, criteria);
+  };
+
   @Post()
   createStudent(@Body() studentDto: StudentDto): Promise<Student> {
     return this.studentService.createStudent(studentDto);

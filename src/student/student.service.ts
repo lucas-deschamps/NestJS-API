@@ -12,6 +12,18 @@ export class StudentService {
     return await this.studentRepository.find();
   };
 
+  async getStudentByCriteria(grade: number, criteria: string): Promise<Student[]> {
+    const students: Student[] = await this.getAllStudents();
+
+    if (criteria === ">") {
+      return students.filter(student => student.nota > grade);
+    };
+
+    if (criteria === "<") {
+      return students.filter(student => student.nota < grade);
+    };
+  };
+
   async getUpperEndStudents(): Promise<Student[]> {
     let total = 0;
     const upperEndStudents: Student[] = [];

@@ -13,7 +13,7 @@ export class StudentRepository extends Repository<Student> {
     student.nome = nome;
     student.data_nascimento = data_nascimento;
     student.cpf = cpf;
-    student.nota = nota;
+    student.nota = Number(nota);
 
     await student.save();
 
