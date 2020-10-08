@@ -7,6 +7,11 @@ import { Student } from './student.entity';
 export class StudentController {
   constructor(private studentService: StudentService) {}
 
+  @Get()
+  getAllStudents(): Promise<Student[]> {
+    return this.studentService.getAllStudents();
+  };
+
   @Get('/:id')
   getStudentById(@Param('id', ParseIntPipe) id: number): Promise<Student> {
     return this.studentService.getStudentById(id);
@@ -22,7 +27,7 @@ export class StudentController {
     return this.studentService.updateStudent(id, studentDto);
   };
 
-  @Delete('/:id')
+  @Delete('/:id') // extra
   deleteStudent(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.studentService.deleteStudent(id);
   };

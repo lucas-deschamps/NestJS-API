@@ -8,6 +8,10 @@ import { Student } from './student.entity';
 export class StudentService {
   constructor(@InjectRepository(StudentRepository) private studentRepository: StudentRepository) {}
 
+  async getAllStudents(): Promise<Student[]> {
+    return await this.studentRepository.find();
+  };
+
   async getStudentById(id: number): Promise<Student> {
     const student = await this.studentRepository.findOne(id);
 
