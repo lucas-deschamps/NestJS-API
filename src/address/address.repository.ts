@@ -13,6 +13,7 @@ export class AddressRepository extends Repository<Address> {
     address.numero = numero;
     address.complemento = complemento;
     address.bairro = bairro;
+    address.aluno_id = aluno_id;
     address.aluno = aluno_id;
 
     await address.save();

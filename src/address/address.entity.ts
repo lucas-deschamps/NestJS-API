@@ -18,6 +18,9 @@ export class Address extends BaseEntity {
   @Column({ type: "varchar", nullable: false })
   bairro: string;
 
+  @Column({ type: "int", nullable: false })
+  aluno_id: number;
+
   @ManyToOne(() => Student, { nullable: false })
   aluno: number;
 };

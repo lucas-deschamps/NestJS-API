@@ -3,10 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { StudentRepository } from './student.repository';
 import { StudentDto } from './dto/student.dto';
 import { Student } from './student.entity';
+import { AddressRepository } from '../address/address.repository';
 
 @Injectable()
 export class StudentService {
-  constructor(@InjectRepository(StudentRepository) private studentRepository: StudentRepository) {}
+  constructor(
+    @InjectRepository(StudentRepository) private studentRepository: StudentRepository,
+    @InjectRepository(AddressRepository) private addressRepository: AddressRepository
+  ) {}
 
   async getAllStudents(): Promise<Student[]> {
     return await this.studentRepository.find();
@@ -43,6 +47,20 @@ export class StudentService {
     };
 
     return upperEndStudents;
+  };
+
+  async getStudentAddress(studentId: number) {
+    const addresses = await this.addressRepository.find();
+
+    return {
+      total: addresses.filter(address => address.aluno_id === studentId).length,
+      enderecos: addresses.filter(address => address.aluno_id === studentId).map(address => {
+        return {
+          endereco: `${address.rua}, ${address.numero} - ${address.complemento}`,
+          bairro: `${address.bairro}`,
+        }
+      })
+    };
   };
 
   async getStudentById(id: number): Promise<Student> {
