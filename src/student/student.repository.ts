@@ -1,7 +1,7 @@
 import { EntityRepository, Repository } from "typeorm";
 import { Student } from './student.entity';
 import { StudentDto } from './dto/student.dto';
-import { NotFoundException } from "@nestjs/common";
+import { NotAcceptableException, NotFoundException } from "@nestjs/common";
 
 @EntityRepository(Student)
 export class StudentRepository extends Repository<Student> {
@@ -14,6 +14,18 @@ export class StudentRepository extends Repository<Student> {
     student.data_nascimento = data_nascimento;
     student.cpf = cpf;
     student.nota = Number(nota);
+
+    if (cpf.length === 14) {
+      student.cpf = cpf.replace(/\D+/g, '');
+    };
+
+    if (cpf.length === 11 && Boolean(cpf.match(/\D+/))) {
+      throw new NotAcceptableException("CPF inválido.");
+    };
+
+    if (cpf.length !== 11 && cpf.length !== 14) {
+      throw new NotAcceptableException("CPF inválido.");
+    };
 
     await student.save();
 
