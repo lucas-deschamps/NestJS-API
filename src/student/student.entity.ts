@@ -11,7 +11,7 @@ export class Student extends BaseEntity {
   @Column({ type: "date", nullable: false })
   data_nascimento: string;
 
-  @Column({ type: "varchar", nullable: false })
+  @Column({ type: "varchar", nullable: false, unique: true })
   cpf: string;
 
   @Column({ type: "decimal", precision: 3, scale: 1 })
