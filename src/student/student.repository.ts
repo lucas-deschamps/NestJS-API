@@ -12,11 +12,15 @@ export class StudentRepository extends Repository<Student> {
 
     student.nome = nome;
     student.data_nascimento = data_nascimento;
-    student.cpf = cpf;
+    student.cpf = cpf.toString();
     student.nota = Number(nota);
 
-    if (cpf.length === 14) {
+    if (Boolean(cpf.match(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/))) {
       student.cpf = cpf.replace(/\D+/g, '');
+    };
+
+    if (cpf.length === 14 && (!Boolean(cpf.match(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/)))) {
+      throw new NotAcceptableException("CPF inválido.");
     };
 
     if (cpf.length === 11 && Boolean(cpf.match(/\D+/))) {
@@ -36,14 +40,12 @@ export class StudentRepository extends Repository<Student> {
     return await this.save({ ...studentDto, id: Number(id) })
   };
 
-  async deleteStudent(id: number): Promise<void> {
-    const result = await this.delete(id);
+  async deleteStudent(id: number): Promise<string> {
     try {
-      result;
+      const result = await this.delete(id);
+      if (result.affected === 0) throw new NotFoundException();
     } catch {
-      if (result.affected === 0) {
-        throw new NotFoundException(`Aluno com o ID '${id}' não foi encontrado.`);
+        return `Aluno com o ID '${id}' não foi encontrado.`;
       };
-    };
   };
 };

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseInterceptors } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { StudentDto } from './dto/student.dto';
 import { Student } from './student.entity';
@@ -7,16 +7,19 @@ import { Student } from './student.entity';
 export class StudentController {
   constructor(private studentService: StudentService) {}
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   getAllStudents(): Promise<Student[]> {
     return this.studentService.getAllStudents();
   };
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('/media')
   getUpperEndStudents(): Promise<Student[]> {
     return this.studentService.getUpperEndStudents();
   };
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('/:id')
   getStudentById(@Param('id', ParseIntPipe) id: number): Promise<Student> {
     return this.studentService.getStudentById(id);
@@ -27,6 +30,7 @@ export class StudentController {
     return this.studentService.getStudentAddress(studentId);
   };
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('/:nota/criterio/:criterio')
   getStudentByCriteria(@Param('nota', ParseIntPipe) grade: number, @Param('criterio') criteria: string): Promise<Student[]> {
     return this.studentService.getStudentByCriteria(grade, criteria);
@@ -43,7 +47,7 @@ export class StudentController {
   };
 
   @Delete('/:id') // extra
-  deleteStudent(@Param('id', ParseIntPipe) id: number): Promise<void> {
+  deleteStudent(@Param('id', ParseIntPipe) id: number): Promise<string> {
     return this.studentService.deleteStudent(id);
   };
 };
