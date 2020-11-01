@@ -4,4 +4,4 @@
 
 Instruções do desafio original:
 
-![Instructions](./markdown/API_pt1.png)
+![](./markdown/API_pt1.png)
