@@ -4,4 +4,4 @@
 
 Instruções do desafio original:
 
-![API challenge instructions](markdown/Instruções do Desafio API Nodejs - Nest.png)
+![API challenge instructions](./markdown/'Instruções do Desafio API Nodejs - Nest'.png)
