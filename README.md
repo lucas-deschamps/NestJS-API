@@ -5,3 +5,5 @@
 Instruções do desafio original:
 
 ![](./markdown/API_pt1.png)
+
+![](./markdown/API_pt2.png)
